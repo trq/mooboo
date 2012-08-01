@@ -45,7 +45,7 @@
 
         parent.fireEvent('close', e.target);
 
-        if (e.isDefaultPrevented) return
+        if (e.isDefaultPrevented) return;
 
         parent.removeClass('in');
 
@@ -54,7 +54,7 @@
             parent.dispose();
         }
 
-        Transition && parent.hasClass('fade') ? parent.on(Transition.end, removeElement) :removeElement()
+        Transition && parent.hasClass('fade') ? parent.on(Transition.end, removeElement) : removeElement();
     }
 
     window.addEvent('domready', function() {
