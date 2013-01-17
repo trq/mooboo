@@ -18,7 +18,7 @@
  * limitations under the License.
  * ========================================================== */
 
- Element.implement ({
+Element.implement ({
     tooltip: function(options) {
         if ( this.retrieve('tooltip') === null ) {
             this.store('tooltip', new Tooltip (options, this));
@@ -28,7 +28,7 @@
 });
 
 Tooltip = new Class({
-    Implements: [Options, Events],
+    Implements: [Options],
     options: {
         animation: true,        // apply a css fade transition to the tooltip
 
@@ -162,6 +162,8 @@ Tooltip = new Class({
 
         tip.getElement('.tooltip-inner').set(insert_method, title);
 
+        tip.removeClass('fade in top bottom left right');
+
         return this;
     },
 
@@ -185,7 +187,8 @@ Tooltip = new Class({
             }
 
             tip = tip.dispose();
-            tip.inject(selector, 'after');
+            tip.setStyle('display', 'block')
+                .inject(selector, 'after');
 
             if (typeof placement == 'function') {
 
