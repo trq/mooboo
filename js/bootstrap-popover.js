@@ -66,5 +66,4 @@ Popover = new Class({
         return this.options.content;
     }
 
-
 });

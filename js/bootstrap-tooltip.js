@@ -197,41 +197,66 @@ Tooltip = new Class({
 
             } else {
 
+                tip.addClass(placement);
+
+                // Calculate Sizes for Selector and Tip
+                var tip_size      = tip.getComputedSize();
+                var offset_amount;
+
+                /**
+                 * Mootools edge positions were inconsistant in this situation,
+                 * calculating offset from relativeToElement manually.
+                 */
                 switch (placement) {
                     case 'top':
+                        offset_amount = {
+                            x: -(tip_size.totalWidth / 2),
+                            y: -(tip_size.totalHeight)
+                        };
+
                         tip.position({
                             'relativeTo': selector,
                             'position': 'centerTop',
-                            'edge': 'centerBottom'
+                            'offset': offset_amount
                         });
                         break;
 
                     case 'right':
+                        offset_amount = {
+                            x: 0,
+                            y: -(tip_size.totalHeight / 2)
+                        };
                         tip.position({
                             'relativeTo': selector,
                             'position': 'centerRight',
-                            'edge': 'centerLeft'
+                            'offset': offset_amount
                         });
                         break;
 
                     case 'bottom':
+                        offset_amount = {
+                            x: -(tip_size.totalWidth / 2),
+                            y: 0
+                        };
                         tip.position({
                             'relativeTo': selector,
                             'position': 'centerBottom',
-                            'edge': 'centerTop'
+                            'offset': offset_amount
                         });
                         break;
 
                     case 'left':
+                        offset_amount = {
+                            x: -(tip_size.totalWidth),
+                            y: -(tip_size.totalHeight / 2)
+                        };
                         tip.position({
                             'relativeTo': selector,
                             'position': 'centerLeft',
-                            'edge': 'centerRight'
+                            'offset': offset_amount
                         });
                         break;
                 }
-
-                tip.addClass(placement);
 
             }
 
@@ -248,7 +273,8 @@ Tooltip = new Class({
             this.tip = new Elements.from(this.options.template);
 
         }
-        return this.tip;
+
+        return this.tip[0];
     },
 
     /**
