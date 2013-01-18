@@ -370,7 +370,7 @@ Tooltip = new Class({
 
                 if (element.get('data-' + dataset_name)) {
 
-                    options[dataset_name] =element.get('data-' + dataset_name);
+                    options[dataset_name] = this.trueValue( element.get('data-' + dataset_name) );
 
                 }
 
