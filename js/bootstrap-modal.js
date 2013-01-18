@@ -69,7 +69,6 @@ Modal = new Class({
         }.bind(this));
 
         if (this.options.remote && this.element.getElement('.modal-body')) {
-            console.log('loading', this.options.remote);
             this.element.getElement('.modal-body').load(this.options.remote);
         }
 
@@ -168,7 +167,7 @@ Modal = new Class({
 
         this.element.removeClass('in').set('aria-hidden', true);
 
-        if (this.element.hasClass('fade')) {
+        if (this.browser_transition_end && this.element.hasClass('fade')) {
             this.hideWithTransition();
         } else {
             this.hideModal();
@@ -334,7 +333,7 @@ Modal = new Class({
 
                 if (element.get('data-' + dataset_name)) {
 
-                    options[dataset_name] =element.get('data-' + dataset_name);
+                    options[dataset_name] = this.trueValue( element.get('data-' + dataset_name) );
 
                 }
 
