@@ -212,7 +212,12 @@ Modal = new Class({
 
     hideModal: function () {
         this.element.hide();
-        this.element.fireEvent('hidden');
+
+        if (this.browser_transition_end) {
+            this.element.fireEvent('hidden', null, 500);
+        } else {
+            this.element.fireEvent('hidden');
+        }
 
         this.backdrop();
     },
